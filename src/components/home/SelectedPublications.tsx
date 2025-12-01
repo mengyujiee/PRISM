@@ -10,17 +10,17 @@ interface SelectedPublicationsProps {
     enableOnePageMode?: boolean;
 }
 
-export default function SelectedPublications({ publications, title = 'Selected Publications', enableOnePageMode = false }: SelectedPublicationsProps) {
+export default function SelectedPublications({ publications, title = 'Selected Publications' }: SelectedPublicationsProps) {
     return (
         <motion.section
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
+            transition={{ duration: 0.6 }}
         >
             <div className="flex items-center justify-between mb-4">
                 <h2 className="text-2xl font-serif font-bold text-primary">{title}</h2>
                 <Link
-                    href={enableOnePageMode ? "/#publications" : "/publications"}
+                    href="/publications"
                     prefetch={true}
                     className="text-accent hover:text-accent-dark text-sm font-medium transition-all duration-200 rounded hover:bg-accent/10 hover:shadow-sm"
                 >
@@ -33,7 +33,7 @@ export default function SelectedPublications({ publications, title = 'Selected P
                         key={pub.id}
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.4, delay: 0.1 * index }}
+                        transition={{ duration: 0.4, delay: Math.min(0.1 * index, 0.5) }} // 最大延迟0.5s，平滑渐入
                         className="bg-neutral-50 dark:bg-neutral-800 p-4 rounded-lg shadow-sm border border-neutral-200 dark:border-[rgba(148,163,184,0.24)] hover:shadow-lg transition-all duration-200 hover:scale-[1.02]"
                     >
                         <h3 className="font-semibold text-primary mb-2 leading-tight">
